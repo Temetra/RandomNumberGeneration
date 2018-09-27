@@ -2,6 +2,7 @@
 // http://papa.bretmulvey.com/post/124027987928/hash-functions
 // http://www.pcg-random.org/posts/some-prng-implementations.html
 
+// Used for seed generation
 function xfnv1a(k) {
 	for (var i = 0, h = 2166136261 >>> 0; i < k.length; i++)
 		h = Math.imul(h ^ k.charCodeAt(i), 16777619);
@@ -12,6 +13,7 @@ function xfnv1a(k) {
 	}
 }
 
+// Pseudorandom number generator
 function sfc32(a, b, c, d) {
 	return function () {
 		a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
@@ -35,7 +37,7 @@ var SeededSfc32 = class {
 }
 
 // random() returns true or false
-// the ratio of true to false can be adjusted
+// The ratio of true to false can be adjusted
 var RandomBoolean = class {
 	constructor(seed_string, ratio = 0.5) {
 		this._rng = new SeededSfc32(seed_string)
@@ -49,9 +51,9 @@ var RandomBoolean = class {
 }
 
 // random() returns true or false
-// the ratio of true to false can be adjusted
-// sequential true results are limited to the threshold
-// results past this threshold are deferred for later, to maintain the ratio
+// The ratio of true to false can be adjusted
+// Sequential true results are limited to the threshold
+// Results past this threshold are deferred for later, to maintain the ratio
 var LimitedRandomBoolean = class {
 	constructor(seed_string, ratio = 0.5, run_threshold = 3) {
 		this._rng = new RandomBoolean(seed_string, ratio)

@@ -6,12 +6,34 @@
 	<title>Random Number Generation</title>
 	<meta name="title" content="">
 	<meta name="description" content="">
-	<style>canvas { border:solid 1px #999; }</style>
+	<link rel="stylesheet" type="text/css" href="index.css">
 	<script type="module" src="index.js"></script>
 </head>
 
 <body>
-	<div id="output"></div>
+	<div id="content">
+		<h1>Random Number Generation</h1>
+		<div id="output"></div>
+		<div id="selection">
+			<input name="choose_random" id="random_colors" type="radio" value="Colors" checked>
+			<label for="random_colors">Random Colors</label>
+			<input name="choose_random" id="random_pixels" type="radio" value="Boolean">
+			<label for="random_pixels">Random Pixels</label>
+			<input name="choose_random" id="limited_random_pixels" type="radio" value="LimitedBoolean">
+			<label for="limited_random_pixels">Random Pixels (limited sequences)</label>
+		</div>
+		<div id="seed">
+			<input name="seed_input" id="seed_input" type="text" value="RandomSeed">
+		</div>
+		<div id="ratio_slider" class="slider">
+			<label for="ratio_range">Pixel Ratio</label>
+			<input name="ratio_range" id="ratio_range" type="range" min="1" max="100" step="1" value="25">
+		</div>
+		<div id="threshold_slider" class="slider">
+			<label for="threshold_range">Sequence Limit</label>
+			<input name="threshold_range" id="threshold_range" type="range" min="1" max="10" step="1" value="5">
+		</div>
+	</div>
 </body>
 
 </html>
