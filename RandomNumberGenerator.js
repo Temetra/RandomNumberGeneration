@@ -121,4 +121,38 @@ var LimitedRandomBoolean = class {
 	}
 }
 
-export { SeededSfc32, RandomCharacters, RandomBoolean, LimitedRandomBoolean }
+var RandomWeightedItem = class {
+	constructor(items, seed_string = "") {
+		if (seed_string.length === 0) {
+			seed_string = RandomSeedFromTime().toString()
+		}
+
+		this._items = items
+		this._rng = new SeededSfc32(seed_string)
+	}
+
+	random() {
+		// Loop through items, aggregating the weight
+		let weighted_item = []
+		let max_weight = 0
+
+		for(var name of Object.getOwnPropertyNames(this._items)) {
+			max_weight += this._items[name]
+			weighted_item.push({ name: name, weight: max_weight })
+		}
+
+		// Generate random number between 0 and max weight
+		let rand = this._rng.random() * max_weight
+		
+		// Find item from list
+		for(var item of weighted_item) {
+			if (rand <= item.weight) {
+				return item.name
+			}
+		}
+
+		return "No Item?"
+	}
+}
+
+export { SeededSfc32, RandomCharacters, RandomBoolean, LimitedRandomBoolean, RandomWeightedItem }
