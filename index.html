@@ -15,23 +15,55 @@
 		<h1>Random Number Generation</h1>
 		<div id="output"></div>
 		<div id="selection">
-			<input name="choose_random" id="random_colors" type="radio" value="Colors" checked>
-			<label for="random_colors">Random Colors</label>
-			<input name="choose_random" id="random_pixels" type="radio" value="Boolean">
-			<label for="random_pixels">Random Pixels</label>
-			<input name="choose_random" id="limited_random_pixels" type="radio" value="LimitedBoolean">
-			<label for="limited_random_pixels">Random Pixels (limited sequences)</label>
+			<div>
+				<input name="choose_random" id="random_colors" type="radio" checked>
+				<label for="random_colors">Random Colors</label>
+			</div>
+			<div>
+				<input name="choose_random" id="random_pixels" type="radio">
+				<label for="random_pixels">Random Pixels</label>
+			</div>
+			<div>
+				<input name="choose_random" id="limited_random_pixels" type="radio">
+				<label for="limited_random_pixels">Random Pixels (limited sequences)</label>
+			</div>
+			<div>
+				<input name="choose_random" id="random_fruit" type="radio">
+				<label for="random_fruit">Random Fruit</label>
+			</div>
 		</div>
 		<div id="seed">
 			<input name="seed_input" id="seed_input" type="text" value="RandomSeed">
 		</div>
-		<div id="ratio_slider" class="slider">
+		<div id="ratio_slider" class="slider hide">
 			<label for="ratio_range">Pixel Ratio</label>
 			<input name="ratio_range" id="ratio_range" type="range" min="1" max="100" step="1" value="25">
 		</div>
-		<div id="threshold_slider" class="slider">
+		<div id="threshold_slider" class="slider hide">
 			<label for="threshold_range">Sequence Limit</label>
 			<input name="threshold_range" id="threshold_range" type="range" min="1" max="10" step="1" value="5">
+		</div>
+		<div id="fruit_sliders" class="hide">
+			<div class="slider half">
+				<label for="apple_range">Apples</label>
+				<input name="apple_range" id="apple_range" type="range" min="0" max="10" step="1" value="1">
+			</div>
+			<div class="slider half">
+				<label for="banana_range">Bananas</label>
+				<input name="banana_range" id="banana_range" type="range" min="0" max="10" step="1" value="1">
+			</div>
+			<div class="slider half">
+				<label for="orange_range">Oranges</label>
+				<input name="orange_range" id="orange_range" type="range" min="0" max="10" step="1" value="1">
+			</div>
+			<div class="slider half">
+				<label for="pear_range">Pear</label>
+				<input name="pear_range" id="pear_range" type="range" min="0" max="10" step="1" value="1">
+			</div>
+			<div class="slider half">
+				<label for="strawberry_range">Strawberry</label>
+				<input name="strawberry_range" id="strawberry_range" type="range" min="0" max="10" step="1" value="1">
+			</div>
 		</div>
 	</div>
 </body>

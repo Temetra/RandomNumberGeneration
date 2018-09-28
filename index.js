@@ -59,6 +59,7 @@ const app = {
 	setSeed: setSeed,
 	setRatio: setRatio,
 	setThreshold: setThreshold,
+	setFruitWeight: setFruitWeight,
 	getRandomCharacters: getRandomCharacters
 }
 
@@ -106,11 +107,8 @@ function setRatio(value) {
 	prng_ratio = value
 
 	// Update display
-	if (currentScenario) {
-		if (currentScenario === scenarios.randomBooleans || 
-		currentScenario === scenarios.limitedRandomBooleans) {
-			currentScenario()
-		}
+	if (currentScenario === scenarios.randomBooleans || currentScenario === scenarios.limitedRandomBooleans) {
+		currentScenario()
 	}
 }
 
@@ -121,10 +119,18 @@ function setThreshold(value) {
 	prng_threshold = value
 
 	// Update display
-	if (currentScenario) {
-		if (currentScenario === scenarios.limitedRandomBooleans) {
-			currentScenario()
-		}
+	if (currentScenario === scenarios.limitedRandomBooleans) {
+		currentScenario()
+	}
+}
+
+function setFruitWeight(fruit, weight) {
+	// Set value
+	fruits[fruit] = weight
+
+	// Update display
+	if (currentScenario === scenarios.randomFruit) {
+		currentScenario()
 	}
 }
 

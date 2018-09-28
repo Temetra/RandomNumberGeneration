@@ -6,52 +6,92 @@ function bindEvents(appObj) {
 	document.getElementById("random_colors").addEventListener("change", randomColorsChange)
 	document.getElementById("random_pixels").addEventListener("change", randomPixelsChange)
 	document.getElementById("limited_random_pixels").addEventListener("change", limitedRandomPixelsChange)
+	document.getElementById("random_fruit").addEventListener("change", randomFruitChange)
 
-	let ratio_range = document.getElementById("ratio_range")
-	ratio_range.addEventListener("input", ratioRangeInput)
-	ratioRangeInput({target:ratio_range})
+	let elem = document.getElementById("seed_input")
+	elem.value = app.getRandomCharacters()
+	elem.addEventListener("input", (evt) => {
+		let value = evt.target.value
+		app.setSeed(value)
+	})
+	elem.dispatchEvent(new Event("input"))
 
-	let threshold_range = document.getElementById("threshold_range")
-	threshold_range.addEventListener("input", thresholdRangeInput)
-	thresholdRangeInput({target:threshold_range})
+	addAndTriggerEvent("ratio_range", "input", (evt) => {
+		let value = parseInt(evt.target.value) * 0.01
+		app.setRatio(value) 
+	})
 
-	let seed_input = document.getElementById("seed_input")
-	seed_input.addEventListener("input", seedInputChange)
-	seed_input.value = app.getRandomCharacters()
-	seedInputChange({target:seed_input})
+	addAndTriggerEvent("threshold_range", "input", (evt) => {
+		let value = parseInt(evt.target.value)
+		app.setThreshold(value)
+	})
+
+	addAndTriggerEvent("apple_range", "input", (evt) => {
+		let value = parseInt(evt.target.value)
+		app.setFruitWeight("apple", value)
+	})
+
+	addAndTriggerEvent("banana_range", "input", (evt) => {
+		let value = parseInt(evt.target.value)
+		app.setFruitWeight("banana", value)
+	})
+
+	addAndTriggerEvent("orange_range", "input", (evt) => {
+		let value = parseInt(evt.target.value)
+		app.setFruitWeight("orange", value)
+	})
+
+	addAndTriggerEvent("pear_range", "input", (evt) => {
+		let value = parseInt(evt.target.value)
+		app.setFruitWeight("pear", value)
+	})
+
+	addAndTriggerEvent("strawberry_range", "input", (evt) => {
+		let value = parseInt(evt.target.value)
+		app.setFruitWeight("strawberry", value)
+	})
+}
+
+function addAndTriggerEvent(elementName, eventType, func) {
+	let elem = document.getElementById(elementName)
+	elem.addEventListener(eventType, func)
+	elem.dispatchEvent(new Event(eventType))
+}
+
+function hide(elementName) {
+	document.getElementById(elementName).classList.add("hide")
+}
+
+function show(elementName) {
+	document.getElementById(elementName).classList.remove("hide")
 }
 
 function randomColorsChange() {
-	document.getElementById("ratio_slider").style.visibility = "hidden"
-	document.getElementById("threshold_slider").style.visibility = "hidden"
+	hide("ratio_slider")
+	hide("threshold_slider")
+	hide("fruit_sliders")
 	app.setScenario(app.scenarios.randomColors)
 }
 
 function randomPixelsChange() {
-	document.getElementById("ratio_slider").style.visibility = "visible"
-	document.getElementById("threshold_slider").style.visibility = "hidden"
+	show("ratio_slider")
+	hide("threshold_slider")
+	hide("fruit_sliders")
 	app.setScenario(app.scenarios.randomBooleans)
 }
 
 function limitedRandomPixelsChange() {
-	document.getElementById("ratio_slider").style.visibility = "visible"
-	document.getElementById("threshold_slider").style.visibility = "visible"
+	show("ratio_slider")
+	show("threshold_slider")
+	hide("fruit_sliders")
 	app.setScenario(app.scenarios.limitedRandomBooleans)
 }
 
-function ratioRangeInput(evt) {
-	let value = parseInt(evt.target.value) * 0.01
-	app.setRatio(value) 
-}
-
-function thresholdRangeInput(evt) {
-	let value = parseInt(evt.target.value)
-	app.setThreshold(value)
-}
-
-function seedInputChange(evt) {
-	let value = evt.target.value
-	app.setSeed(value)
+function randomFruitChange() {
+	hide("ratio_slider")
+	hide("threshold_slider")
+	show("fruit_sliders")
+	app.setScenario(app.scenarios.randomFruit)
 }
 
 export { bindEvents }
