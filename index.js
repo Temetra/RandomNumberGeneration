@@ -47,7 +47,7 @@ const scenarios = {
 	},
 
 	randomFruit: function() {
-		prng = new RandomNumberGenerator.RandomWeightedItem(fruits)
+		prng = new RandomNumberGenerator.RandomWeightedItem(fruits, prng_seed)
 		plotRandomPixels()
 	}
 }
