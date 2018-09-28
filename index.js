@@ -23,7 +23,8 @@ const app = {
 	setThreshold: setThreshold,
 	selectRandomColors: selectRandomColors,
 	selectRandomBoolean: selectRandomBoolean,
-	selectLimitedRandomBoolean: selectLimitedRandomBoolean
+	selectLimitedRandomBoolean: selectLimitedRandomBoolean,
+	getRandomCharacters: new RandomNumberGenerator.RandomCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
 }
 
 window.addEventListener("load", () => {
@@ -36,6 +37,9 @@ window.addEventListener("load", () => {
 
 	// Set default random func
 	selectRandomColors()
+
+	// Add app to window for debugging
+	window.app = app
 })
 
 function setSeed(value) {
