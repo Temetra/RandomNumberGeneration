@@ -28,11 +28,48 @@ function sfc32(a, b, c, d) {
 	}
 }
 
+function RandomSeedFromTime() {
+	let t = Math.round((new Date).getTime())
+	let seed = (((t & 0xff000000) >>> 23) + 
+		((t & 0x00ff0000) >>> 8) + 
+		((t & 0x0000ff00) << 8) +
+		((t & 0x000000ff) << 23))
+	return seed
+}
+
 // random() returns a number between 0.0 and 1.0
 var SeededSfc32 = class {
 	constructor(seed_string) {
 		let seed = xfnv1a(seed_string)
 		this.random = sfc32(seed(), seed(), seed(), seed())
+	}
+}
+
+// Returns a random sequence of characters from a defined pool
+var RandomCharacters = class {
+	constructor(character_pool = "") {
+		let seed_string = RandomSeedFromTime().toString()
+		this._rng = new SeededSfc32(seed_string)
+		
+		this.character_pool = character_pool
+		if (this.character_pool.length == 0) {
+			for (let i = 33; i <= 126; i++) {
+				this.character_pool += String.fromCharCode(i)
+			}
+		}
+	}
+
+	random(length = 1) {
+		let result = ""
+
+		for (let i = 1; i <= length; i++) {
+			let index = this._rng.random()
+			index *= (this.character_pool.length - 1)
+			index = Math.round(index)
+			result += this.character_pool[index]
+		}
+
+		return result
 	}
 }
 
@@ -84,4 +121,4 @@ var LimitedRandomBoolean = class {
 	}
 }
 
-export { SeededSfc32, RandomBoolean, LimitedRandomBoolean }
+export { SeededSfc32, RandomCharacters, RandomBoolean, LimitedRandomBoolean }
