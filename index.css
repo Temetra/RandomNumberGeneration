@@ -21,12 +21,13 @@ h1 {
 }
 
 #output {
-	background-color:#ccc;
+	background-color:white;
 	margin-bottom:16pt;
 }
 
 #output canvas {
 	display:block;
+	margin:0 auto;
 }
 
 #seed {
