@@ -24,19 +24,19 @@ function bindEvents(appObj) {
 function randomColorsChange() {
 	document.getElementById("ratio_slider").style.visibility = "hidden"
 	document.getElementById("threshold_slider").style.visibility = "hidden"
-	app.selectRandomColors() 
+	app.setScenario(app.scenarios.randomColors)
 }
 
 function randomPixelsChange() {
 	document.getElementById("ratio_slider").style.visibility = "visible"
 	document.getElementById("threshold_slider").style.visibility = "hidden"
-	app.selectRandomBoolean() 
+	app.setScenario(app.scenarios.randomBooleans)
 }
 
 function limitedRandomPixelsChange() {
 	document.getElementById("ratio_slider").style.visibility = "visible"
 	document.getElementById("threshold_slider").style.visibility = "visible"
-	app.selectLimitedRandomBoolean() 
+	app.setScenario(app.scenarios.limitedRandomBooleans)
 }
 
 function ratioRangeInput(evt) {
