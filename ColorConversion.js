@@ -35,4 +35,15 @@ function hslToRgb(h, s, l) {
 		Math.round(255 * (rgb1[2] + m))];
 }
 
-export { rgbToHsl, hslToRgb }
+// Converts CSS rgba color into RGBA object format
+function rgba(r, g, b, a) {
+	return { r:r, g:g, b:b, a:(Math.round(a*255)) }
+}
+
+// Converts CSS hsla color into RGBA object format
+function hsla(h, s, l, a) {
+	let rgb = hslToRgb(h, s * 0.01, l *= 0.01)
+	return { r:rgb[0], g:rgb[1], b:rgb[2], a:(Math.round(a*255)) }
+}
+
+export { rgbToHsl, hslToRgb, rgba, hsla }

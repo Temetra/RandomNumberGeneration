@@ -1,5 +1,5 @@
-import * as ScaledCanvas from './ScaledCanvas.js'
-import * as ColorConversion from './ColorConversion.js'
+import { ScaledCanvas } from './ScaledCanvas.js'
+import { hslToRgb, rgba } from './ColorConversion.js'
 import * as RandomNumberGenerator from './RandomNumberGenerator.js'
 import * as Input from './Input.js'
 
@@ -24,13 +24,13 @@ const app = {
 	selectRandomColors: selectRandomColors,
 	selectRandomBoolean: selectRandomBoolean,
 	selectLimitedRandomBoolean: selectLimitedRandomBoolean,
-	getRandomCharacters: new RandomNumberGenerator.RandomCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+	getRandomCharacters: getRandomCharacters
 }
 
 window.addEventListener("load", () => {
 	// Create canvas
 	let container = document.getElementById("output")
-	canvas = new ScaledCanvas.ScaledCanvas(size, size, scale, container)
+	canvas = new ScaledCanvas(size, size, scale, container)
 
 	// Set up UI
 	Input.bindEvents(app)
@@ -41,6 +41,12 @@ window.addEventListener("load", () => {
 	// Add app to window for debugging
 	window.app = app
 })
+
+// Returns 16 random characters [a-zA-Z0-9]
+function getRandomCharacters() {
+	let rnd = new RandomNumberGenerator.RandomCharacters("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+	return rnd.random(16)
+}
 
 function setSeed(value) {
 	// Set value
@@ -144,13 +150,13 @@ function plotRandomPixels() {
 // Return a color based on the type of algo and value
 function getColor(type, value) {
 	switch (type) {
-		case "SeededSfc32":
-			let color = ColorConversion.hslToRgb(value * 360, 1.0, 0.6)
-			return { r:color[0], g:color[1], b:color[2], a:255 }
 		case "RandomBoolean":
 		case "LimitedRandomBoolean":
-		default:
 			if (value) return colors.black
 			else return colors.white
+		case "SeededSfc32":
+		default:
+			let color = hslToRgb(value * 360, 1.0, 0.6)
+			return { r:color[0], g:color[1], b:color[2], a:255 }
 	}
 }

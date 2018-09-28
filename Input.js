@@ -17,7 +17,7 @@ function bindEvents(appObj) {
 
 	let seed_input = document.getElementById("seed_input")
 	seed_input.addEventListener("input", seedInputChange)
-	seed_input.value = app.getRandomCharacters.random(16)
+	seed_input.value = app.getRandomCharacters()
 	seedInputChange({target:seed_input})
 }
 
