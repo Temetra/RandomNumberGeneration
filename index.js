@@ -155,10 +155,11 @@ function getColor(type, value) {
 		case "randomBooleans":
 		case "limitedRandomBooleans":
 			if (value) return colors.black
-			else return colors.white
+			return colors.white
 		case "randomFruit":
 			return colors[value]
 		case "randomColors":
+			/* falls through */
 		default:
 			let color = hslToRgb(value * 360, 1.0, 0.6)
 			return { r:color[0], g:color[1], b:color[2], a:255 }

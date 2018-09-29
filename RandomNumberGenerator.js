@@ -29,7 +29,7 @@ function sfc32(a, b, c, d) {
 }
 
 function RandomSeedFromTime() {
-	let t = Math.round((new Date).getTime())
+	let t = Math.round((new Date()).getTime())
 	let seed = (((t & 0xff000000) >>> 23) + 
 		((t & 0x00ff0000) >>> 8) + 
 		((t & 0x0000ff00) << 8) +
